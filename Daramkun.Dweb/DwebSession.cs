@@ -6,15 +6,8 @@ using System.Threading.Tasks;
 
 namespace Daramkun.Dweb
 {
-	public enum HttpRequestMethod
+	public class DwebSession
 	{
-		HEAD,
-		GET,
-		POST,
-		PUT,
-		DELETE,
-		TRACE,
-		OPTIONS,
-		CONNECT,
+
 	}
 }
