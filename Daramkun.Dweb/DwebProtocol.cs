@@ -16,7 +16,6 @@ namespace Daramkun.Dweb
 
 		internal DwebRequest request;
 
-
 		public DwebListener Listener { get; private set; }
 		internal Stream Stream { get { return stream; } }
 

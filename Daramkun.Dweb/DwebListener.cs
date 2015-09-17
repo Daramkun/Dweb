@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -14,12 +15,15 @@ namespace Daramkun.Dweb
 		Socket listenSocket;
 		protected Socket ListenSocket { get { return listenSocket; } }
 		
+		public string TemporaryDirectory { get; set; }
 		public X509Certificate2 Certificate { get; set; }
 
 		public DwebListener ( IPEndPoint endPoint )
 		{
 			listenSocket = new Socket ( endPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp );
 			listenSocket.Bind ( endPoint );
+
+			TemporaryDirectory = Environment.GetFolderPath ( Environment.SpecialFolder.InternetCache );
 		}
 
 		~DwebListener () { Dispose ( false ); }
