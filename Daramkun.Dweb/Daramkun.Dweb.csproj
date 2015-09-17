@@ -47,6 +47,7 @@
     <Compile Include="DwebListener.cs" />
     <Compile Include="DwebProtocol.cs" />
     <Compile Include="DwebRequest.cs" />
+    <Compile Include="DwebResponse.cs" />
     <Compile Include="DwebSequencialListener.cs" />
     <Compile Include="DwebSession.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

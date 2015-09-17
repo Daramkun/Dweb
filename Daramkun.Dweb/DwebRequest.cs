@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
@@ -222,9 +221,10 @@ namespace Daramkun.Dweb
 			Protocol.request = null;
 		}
 
-		public void BodyCopyTo ( Stream proxyStream )
+		public async void LoadHeaderAsync () { await Task.Run ( () => { var temp = Field; } ); }
+
+		public void BodyCopyTo ( Stream stream )
 		{
-			byte [] headerBytes = new byte [ 1024 ];
 			byte [] dataBuffer = new byte [ 1024 ];
 			if ( field.ContainsKey ( DwebHeaderField.ContentLength ) )
 			{
@@ -234,11 +234,13 @@ namespace Daramkun.Dweb
 				{
 					int len = protocolStream.Read ( dataBuffer, 0, 1024 );
 					length += len;
-					proxyStream.Write ( dataBuffer, 0, len );
+					stream.Write ( dataBuffer, 0, len );
 				}
 			}
 
 			bodyIsAlreadyCopied = true;
 		}
+
+		public async void BodyCopyToAsync ( Stream stream ) { await Task.Run ( () => BodyCopyTo ( stream ) ); }
 	}
 }

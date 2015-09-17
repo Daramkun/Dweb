@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Mime;
 using System.Net.Sockets;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -17,6 +18,7 @@ namespace Daramkun.Dweb
 		
 		public string TemporaryDirectory { get; set; }
 		public X509Certificate2 Certificate { get; set; }
+		public Dictionary<string, ContentType> MimeTypes { get; private set; }
 
 		public DwebListener ( IPEndPoint endPoint )
 		{
@@ -24,6 +26,14 @@ namespace Daramkun.Dweb
 			listenSocket.Bind ( endPoint );
 
 			TemporaryDirectory = Environment.GetFolderPath ( Environment.SpecialFolder.InternetCache );
+
+			MimeTypes = new Dictionary<string, ContentType>
+			{
+				{ "htm", new ContentType ( "text/html" ) },
+                { "html", new ContentType ( "text/html" ) },
+				{ "js", new ContentType ( "text/javascript" ) },
+				{ "css", new ContentType ( "text/css" ) },
+			};
 		}
 
 		~DwebListener () { Dispose ( false ); }
